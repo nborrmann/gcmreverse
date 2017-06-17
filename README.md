@@ -44,7 +44,7 @@ def verify_push(self, server_time, verification_code, **kwargs):
 ```
 
 
-Other interesting things:
+## Other interesting things:
 ```
 # grep -Pri 425112442765 jodel-4.48.0/i
 jodel-4.48.0/apktool/res/values/strings.xml:    <string name="default_web_client_id">425112442765-rh5u1d604qrmgjmv0sj31d4eohnhartg.apps.googleusercontent.com</string>
