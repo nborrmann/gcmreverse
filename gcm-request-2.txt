@@ -1,0 +1,42 @@
+Variables starting with $ are values that i censored. documented below
+
+POST https://android.clients.google.com/c2dm/register3 HTTP/1.1
+Authorization: AidLogin $androidId:$securityToken
+app: com.tellm.android.app
+Gcm-ver: 11055448
+Gcm-cert: a4a8d4d7b09736a0f65596a868cc6fd620920fb0
+User-Agent: Android-GCM/1.5 (HWFRD HUAWEIFRD-L09)
+content-length: 1209
+content-type: application/x-www-form-urlencoded
+Host: android.clients.google.com
+Connection: Keep-Alive
+Accept-Encoding: gzip
+
+X-subtype=425112442765&
+X-X-subscription=425112442765&
+X-X-subtype=425112442765&
+X-app_ver=1001800&
+X-kid=%7CID%7C1%7C&
+X-osv=24&
+X-sig=[b64 encoded, length 343]&
+X-cliv=1&
+X-gmsv=11055448&
+X-pub2=[b64 encoded, length 393]&
+X-X-kid=%7CID%7C1%7C&
+X-appid=c8GItStsCZY&
+X-scope=*&
+X-subscription=425112442765&
+X-gmp_app_id=1%3A425112442765%3Aandroid%3A2f4503e0808c2362&  # this is the value google_app_id from strings.xml
+X-app_ver_name=4.48.0&
+app=com.tellm.android.app&
+sender=425112442765&
+device=$androidId&
+cert=a4a8d4d7b09736a0f65596a868cc6fd620920fb0&
+app_ver=1001800&
+gcm_ver=11055448
+
+token=|ID|1|:c8GItStsCZY:$token
+
+$androidId and $securityToken are device/account specific values issued by google play.
+The two requests differ in the X-scope value and in X-gmp_ver_name. X-sig and X-pub2 are the same across both requests. The $token is 
+different in both requests.
