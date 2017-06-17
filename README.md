@@ -18,12 +18,13 @@ i'll post the requests i saw in mitm to that api in the repo
 
 I was able to get a token using this request, however it is different from the one I saw in the mitm.
 ```
-curl "https://android.clients.google.com/c2dm/register3" \
--H "Authorization: AidLogin $androidId:$securityToken" \
---data "app=com.tellm.android.app&sender=425112442765&device=$androidId&cert=a4a8d4d7b09736a0f65596a868cc6fd620920fb0" \
+curl "https://android.clients.google.com/c2dm/register3" -H "Authorization: AidLogin $androidID:$securityToken" --data "app=com.tellm.android.app&sender=425112442765&device=$androidId&cert=a4a8d4d7b09736a0f65596a868cc6fd6209 20fb0&app_ver=1001800&gcm_ver=11055448&X-appid=$randomString&X-scope=*&X-app_ver_name=4.48.0" -k
 ```
 Maybe because I omitted the ``X-sig`` header? Maybe this is some kind of signing which gives a token but it is not actually valid?
 I'll try to modify the token in the request and see what happens.
+
+Update: I have managed to verify that the above request returns an actual working token by intercepting and modifying requests in fiddler.
+
 
 ### 2. sendPushToken
 
@@ -46,8 +47,9 @@ def verify_push(self, server_time, verification_code, **kwargs):
 Possible path forward:
 1. install a signature spoofed ROM: https://github.com/microg/android_packages_apps_GmsCore/wiki/Signature-Spoofing
 2. install microG fake gapps
-3. check if jodel verification works (if yes, we know that it is fully reversible by just looking at the open source gmscore app)
+3. check if jodel verification works (if yes, we know that it is fully reversible by just looking at the open source gmscore app) **Update: Verification works**.
 
+We need to find out how to receive GCM messages from the server and we are pretty much done.
 
 
 ## Other interesting things:
