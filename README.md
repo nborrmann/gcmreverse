@@ -43,6 +43,12 @@ def verify_push(self, server_time, verification_code, **kwargs):
     return self._send_request("POST", "/v3/user/verification/push", payload={"server_time": server_time, "verification_code": verification_code}, **kwargs)
 ```
 
+Possible path forward:
+1. install a signature spoofed ROM: https://github.com/microg/android_packages_apps_GmsCore/wiki/Signature-Spoofing
+2. install microG fake gapps
+3. check if jodel verification works (if yes, we know that it is fully reversible by just looking at the open source gmscore app)
+
+
 
 ## Other interesting things:
 ```
