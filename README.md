@@ -49,8 +49,9 @@ Possible path forward:
 2. install microG fake gapps
 3. check if jodel verification works (if yes, we know that it is fully reversible by just looking at the open source gmscore app) **Update: Verification works**.
 
-We need to find out how to receive GCM messages from the server and we are pretty much done.
+We need to find out how to receive GCM messages from the server and we are pretty much done. Here is the MicroG Implementation of GCM push:
 
+https://github.com/microg/android_packages_apps_GmsCore/commit/93c3cbb31be6c8ffae81c18e551cb00c74aaaaf4
 
 ## Other interesting things:
 ```
