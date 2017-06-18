@@ -39,8 +39,6 @@ s.name = "new_vc"
 s.value = "1"
 
 x = lr.SerializeToString()
-print(varint.encode(len(x)))
-
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s = ssl.wrap_socket(s)
@@ -51,6 +49,8 @@ s.send(bytes([2]))
 s.send(varint.encode(len(x)))
 s.send(x)
 print("reading")
+
+version = s.recv(1)
 
 while True:
     responseTag = s.recv(1)
@@ -73,8 +73,12 @@ while True:
         dms.ParseFromString(msg)
         print("RECV DATA MESSAGE")
         print(dms)
+    elif responseTag == b'\x04':
+        break
     else:
-        print(responseTag)
+        if not responseTag:
+            break
+        print("unknown response: " + str(responseTag))
 
 s.close()
 print("closed")
