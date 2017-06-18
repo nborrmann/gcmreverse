@@ -37,21 +37,26 @@ I have verified that this is same token that the app gets in the previous step.
 
 ### 3. receive verification_code via GCM and post it to jodel api
 
-no progress here. I don't see the gcm traffic in fiddler mitm, and I havent managed to receive gcm messages myself.
+working and tested.
+
+see ``gcm.py``. Needs a valid androidId and securityToken in credentials.txt
 
 ```python
 def verify_push(self, server_time, verification_code, **kwargs):
     return self._send_request("POST", "/v3/user/verification/push", payload={"server_time": server_time, "verification_code": verification_code}, **kwargs)
 ```
 
-Possible path forward:
-1. install a signature spoofed ROM: https://github.com/microg/android_packages_apps_GmsCore/wiki/Signature-Spoofing
-2. install microG fake gapps
-3. check if jodel verification works (if yes, we know that it is fully reversible by just looking at the open source gmscore app) **Update: Verification works**.
-
-We need to find out how to receive GCM messages from the server and we are pretty much done. Here is the MicroG Implementation of GCM push:
+~~We need to find out how to receive GCM messages from the server and we are pretty much done. Here is the MicroG Implementation of GCM push:~~
 
 https://github.com/microg/android_packages_apps_GmsCore/commit/93c3cbb31be6c8ffae81c18e551cb00c74aaaaf4
+
+
+### 4. generate a valid android_id and key
+
+started working on that in ``checkin.py``. It's working, but when requesting a token with these credentials I get ``Error=PHONE_REGISTRATION_ERROR``. Maybe I'm missing a step.
+
+**This is the only missing piece.**
+
 
 ## Other interesting things:
 ```
