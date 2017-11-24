@@ -5,9 +5,23 @@ import requests
 def getAndroidId():
 	# most minimal checkin request possible
 	cr = checkin_pb2.CheckinRequest()
-	cr.checkin.build.sdkVersion = 18
+	cr.androidId= 0
+	cr.checkin.build.fingerprint = "google/razor/flo:5.0.1/LRX22C/1602158:user/release-keys"
+	cr.checkin.build.hardware = "flo"
+	cr.checkin.build.brand = "google"
+	cr.checkin.build.radio = "FLO-04.04"
+	cr.checkin.build.clientId = "android-google"
+	cr.checkin.build.sdkVersion = 21
+	cr.checkin.lastCheckinMs = 0
+	cr.locale = "en"
+	cr.macAddress.append("".join(random.choice("ABCDEF0123456789") for _ in range(12)))
+	cr.meid = "".join(random.choice("0123456789") for _ in range(15))
+	cr.timeZone = "Europe/London"
 	cr.version = 3
+	cr.otaCert.append("--no-output--")
+	cr.macAddressType.append("wifi")
 	cr.fragment = 0
+	cr.userSerialNumber = 0
 
 	data = cr.SerializeToString()
 	headers = {"Content-type": "application/x-protobuffer",
