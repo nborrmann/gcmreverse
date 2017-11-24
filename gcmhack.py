@@ -26,7 +26,7 @@ def getAndroidId():
 		print(r.text)
 
 def getPushToken(android_id, security_token):
-	headers = {"Authorization: AidLogin {}:{}".format(android_id, security_token)}
+	headers = {"Authorization":"AidLogin {}:{}".format(android_id, security_token)}
 	data = {'app': 'com.tellm.android.app',
 			'sender': '425112442765',
 			'device': str(android_id),
@@ -37,7 +37,7 @@ def getPushToken(android_id, security_token):
 			'X-scope': 'GCM',
 			'X-app_ver_name': '4.48.0'}
 
-	r = requests.post("https://android.clients.google.com/c2dm/register3", data=data)
+	r = requests.post("https://android.clients.google.com/c2dm/register3", data=data, headers=headers)
 	print(r.status_code, r.text)
 
 
